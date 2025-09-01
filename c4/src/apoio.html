@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pedido de Apoio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0f172a; --card:#111827; --muted:#94a3b8; --text:#e5e7eb; --accent:#22c55e; --danger:#ef4444; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif; background:linear-gradient(135deg,#0f172a,#111827);}    
+    .container{min-height:100%; display:grid; place-items:center; padding:24px}
+    .card{width:100%; max-width:520px; background:rgba(17,24,39,.92); border:1px solid rgba(148,163,184,.2); border-radius:20px; box-shadow:0 10px 40px rgba(0,0,0,.35)}
+    .header{padding:28px 28px 0; text-align:center}
+    .badge{display:inline-flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); background:rgba(148,163,184,.12); border:1px solid rgba(148,163,184,.25); padding:6px 10px; border-radius:999px}
+    h1{margin:14px 0 6px; font-size:26px; color:var(--text)}
+    p.sub{margin:0 0 18px; color:var(--muted); font-size:14px}
+    form{padding:22px 28px 28px}
+    label{display:block; font-weight:600; color:var(--text); margin:14px 0 6px; font-size:14px}
+    input{width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(148,163,184,.35); background:#0b1220; color:var(--text); outline:none; transition:border-color .15s, box-shadow .15s}
+    input:focus{border-color:#60a5fa; box-shadow:0 0 0 4px rgba(59,130,246,.15)}
+    .row{display:grid; grid-template-columns:1fr; gap:14px}
+    @media (min-width:560px){ .row{ grid-template-columns:1fr 1fr } }
+    .hint{font-size:12px; color:var(--muted); margin-top:6px}
+    .error{display:none; font-size:12px; color:var(--danger); margin-top:6px}
+    .actions{display:flex; gap:12px; margin-top:18px}
+    button{appearance:none; border:0; padding:12px 16px; border-radius:12px; font-weight:600; cursor:pointer}
+    .btn-primary{background:var(--accent); color:#052e16}
+    .btn-secondary{background:transparent; color:var(--text); border:1px solid rgba(148,163,184,.35)}
+    .foot{padding:0 28px 22px; color:var(--muted); font-size:12px; text-align:center}
+    .success{display:none; padding:14px; background:rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.35); color:#86efac; border-radius:12px; margin-top:14px; font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card" role="region" aria-labelledby="titulo">
+      <div class="header">
+        <span class="badge" aria-label="formulário de apoio">📝 Pedido de apoio</span>
+        <h1 id="titulo">Requisição de Dados</h1>
+        <p class="sub">Preencha os campos abaixo para solicitar apoio. Campos marcados com * são obrigatórios.</p>
+      </div>
+
+      <form id="apoioForm" novalidate>
+        <label for="nome">Nome completo *</label>
+        <input id="nome" name="nome" type="text" placeholder="Ex.: Joao Baptista " autocomplete="name" required minlength="3" />
+        <div class="error" id="err-nome">Informe seu nome (mín. 3 caracteres).</div>
+
+        <div class="row">
+          <div>
+            <label for="valor">Valor (MZN) *</label>
+            <input id="valor" name="valor" type="number" inputmode="decimal" placeholder="Ex.: 100" required min="10" step="0.01" />
+            <div class="hint">Mínimo: 10 MZN</div>
+            <div class="error" id="err-valor">Informe um valor válido (≥ 10).</div>
+          </div>
+          <div>
+            <label for="numero">Número de contacto *</label>
+            <input id="numero" name="numero" type="tel" inputmode="tel" placeholder="Ex.: 84/7XXXXXX" required pattern="^[0-9]{8,12}$" />
+            <div class="hint">Somente dígitos (8–12)</div>
+            <div class="error" id="err-numero">Informe um número válido (8–12 dígitos).</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary">Enviar pedido</button>
+          <button type="reset" class="btn-secondary">Limpar</button>
+        </div>
+
+        <div class="success" id="ok-msg" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="foot">Se tiver dúvidas, contacte-nos.</div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('apoioForm');
+    const nome = document.getElementById('nome');
+    const valor = document.getElementById('valor');
+    const numero = document.getElementById('numero');
+    const ok = document.getElementById('ok-msg');
+
+    // Ajuda: impedir caracteres não numéricos no telefone
+    numero.addEventListener('input', () => {
+      numero.value = numero.value.replace(/\D+/g, '');
+    });
+
+    function show(el){ el.style.display = 'block'; }
+    function hide(el){ el.style.display = 'none'; }
+
+    function validate(){
+      let valid = true;
+      // Nome
+      if(!nome.value || nome.value.trim().length < 3){
+        show(document.getElementById('err-nome')); valid = false;
+      } else { hide(document.getElementById('err-nome')); }
+      // Valor
+      const v = parseFloat(valor.value);
+      if(isNaN(v) || v < 10){
+        show(document.getElementById('err-valor')); valid = false;
+      } else { hide(document.getElementById('err-valor')); }
+      // Número
+      if(!/^\d{8,12}$/.test(numero.value)){
+        show(document.getElementById('err-numero')); valid = false;
+      } else { hide(document.getElementById('err-numero')); }
+      return valid;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      hide(ok);
+      if(!validate()) return;
+
+      const data = {
+        nome: nome.value.trim(),
+        valor: Number(valor.value).toFixed(2),
+        numero: numero.value.trim()
+      };
+
+      // 👉 Aqui você integra com o backend (fetch/POST) ou WhatsApp/API de pagamentos
+      // fetch('/api/apoio', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      //   .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      //   .then(() => { ok.textContent = 'Pedido enviado com sucesso!'; show(ok); form.reset(); })
+      //   .catch(() => { ok.textContent = 'Falha ao enviar. Tente novamente.'; show(ok); });
+
+      // Simulação local de sucesso:
+      ok.textContent = `Obrigado, ${data.nome}! Pedido registado: ${data.valor} MZN | ${data.numero}`;
+      show(ok);
+      form.reset();
+    });
+  </script>
+</body>
+</html> COLOCAR OPÇÕES DE VALOR 
