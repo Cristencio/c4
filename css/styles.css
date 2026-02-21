@@ -11118,3 +11118,110 @@ body {
   border-radius: 14px;
   box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
 }
+
+/* ===== Animações modernas (comentários em português) ===== */
+/* Animação de entrada suave para blocos principais */
+.animate-fade-in {
+  animation: fadeInUp 0.8s ease both;
+}
+
+/* Variante com pequeno atraso para criar efeito em cascata */
+.animate-fade-in-delayed {
+  animation: fadeInUp 0.95s ease 0.15s both;
+}
+
+/* Efeito de subida para cartões */
+.animate-rise {
+  animation: riseIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Efeito de "pop" para elementos de ação */
+.animate-pop {
+  animation: popIn 0.55s ease both;
+}
+
+/* Hover mais vivo para os cartões de competências */
+.skill-card {
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 20px 40px rgba(76, 29, 149, 0.18);
+}
+
+/* Efeito de brilho no botão de apoio */
+.support-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.support-btn::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: -40%;
+  width: 36%;
+  height: 320%;
+  transform: rotate(24deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+  animation: shineSweep 3.2s ease-in-out infinite;
+}
+
+/* Keyframes principais */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shineSweep {
+  0%, 35% {
+    left: -45%;
+  }
+  55%, 100% {
+    left: 130%;
+  }
+}
+
+/* Respeita usuários com redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-in-delayed,
+  .animate-rise,
+  .animate-pop,
+  .support-btn::after {
+    animation: none !important;
+  }
+}
