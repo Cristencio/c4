@@ -11228,15 +11228,13 @@ body {
 
 /* ===== Ajustes solicitados: centralização + rolagem horizontal + page turn ===== */
 @media (min-width: 992px) {
-  body {
+  .container-fluid.p-0 {
     overflow-x: auto;
     overflow-y: hidden;
-  }
-
-  .container-fluid.p-0 {
     display: flex;
     flex-direction: row;
     width: max-content;
+    max-width: 100%;
     min-height: 100vh;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -11252,8 +11250,8 @@ body {
   }
 
   .container-fluid.p-0 > .resume-section.is-turning {
-    transform: perspective(1200px) rotateY(-8deg) scale(0.98);
-    opacity: 0.78;
+    transform: perspective(1200px) rotateY(-11deg) scale(0.98);
+    opacity: 0.82;
     box-shadow: 0 20px 45px rgba(15, 23, 42, 0.2);
   }
 

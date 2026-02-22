@@ -3,58 +3,65 @@
 * Copyright 2013-2023 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
 */
+//
+// Scripts
+// 
 
-window.addEventListener('DOMContentLoaded', () => {
-  const sideNav = document.body.querySelector('#sideNav');
-  if (sideNav) {
-    new bootstrap.ScrollSpy(document.body, {
-      target: '#sideNav',
-      rootMargin: '0px 0px -40%',
+window.addEventListener('DOMContentLoaded', event => {
+
+    // Activate Bootstrap scrollspy on the main nav element
+    const sideNav = document.body.querySelector('#sideNav');
+    if (sideNav) {
+        new bootstrap.ScrollSpy(document.body, {
+            target: '#sideNav',
+            rootMargin: '0px 0px -40%',
+        });
+    };
+
+    // Collapse responsive navbar when toggler is visible
+    const navbarToggler = document.body.querySelector('.navbar-toggler');
+    const responsiveNavItems = [].slice.call(
+        document.querySelectorAll('#navbarResponsive .nav-link')
+    );
+    responsiveNavItems.map(function (responsiveNavItem) {
+        responsiveNavItem.addEventListener('click', () => {
+            if (window.getComputedStyle(navbarToggler).display !== 'none') {
+                navbarToggler.click();
+            }
+        });
     });
-  }
 
-  const navbarToggler = document.body.querySelector('.navbar-toggler');
-  const responsiveNavItems = [].slice.call(document.querySelectorAll('#navbarResponsive .nav-link'));
+});
 
-  responsiveNavItems.forEach((responsiveNavItem) => {
-    responsiveNavItem.addEventListener('click', function () {
-      responsiveNavItems.forEach((l) => l.classList.remove('active'));
+document.addEventListener('DOMContentLoaded', function () {
+  const links = document.querySelectorAll('#sideNav .nav-link');
+  links.forEach(link => {
+    link.addEventListener('click', function (e) {
+      links.forEach(l => l.classList.remove('active'));
       this.classList.add('active');
-
-      if (navbarToggler && window.getComputedStyle(navbarToggler).display !== 'none') {
-        navbarToggler.click();
-      }
     });
   });
+});
+        icon.classList.replace('fa-moon', 'fa-sun');
 
-  const pageContainer = document.querySelector('.container-fluid.p-0');
-  const sections = document.querySelectorAll('.container-fluid.p-0 > .resume-section');
-
-  if (pageContainer && window.matchMedia('(min-width: 992px)').matches) {
-    pageContainer.addEventListener(
-      'wheel',
-      (event) => {
-        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-        event.preventDefault();
-        pageContainer.scrollBy({ left: event.deltaY, behavior: 'smooth' });
-      },
-      { passive: false }
-    );
-
-    let turnTimer;
-    pageContainer.addEventListener('scroll', () => {
-      sections.forEach((section) => section.classList.remove('is-turning'));
-
-      const activeSection = Array.from(sections).find((section) => {
-        const rect = section.getBoundingClientRect();
-        return rect.left >= 0 && rect.left < window.innerWidth * 0.45;
-      });
-
-      if (activeSection) {
-        activeSection.classList.add('is-turning');
-        clearTimeout(turnTimer);
-        turnTimer = setTimeout(() => activeSection.classList.remove('is-turning'), 420);
-      }
+    themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const newTheme = current === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Alternar ícone
+        icon.classList.toggle('fa-moon');
+        icon.classList.toggle('fa-sun');
     });
-  }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const links = document.querySelectorAll('#sideNav .nav-link');
+  links.forEach(link => {
+    link.addEventListener('click', function (e) {
+      links.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
 });
