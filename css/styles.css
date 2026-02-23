@@ -11015,6 +11015,12 @@ body {
   transform: translateX(3px);
 }
 
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .hero-section .resume-section-content {
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(6px);
@@ -11022,6 +11028,10 @@ body {
   border-radius: 24px;
   padding: clamp(1.2rem, 2vw, 2.2rem);
   box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .hero-badge {
@@ -11223,52 +11233,5 @@ body {
   .animate-pop,
   .support-btn::after {
     animation: none !important;
-  }
-}
-
-/* ===== Ajustes solicitados: centralização + rolagem horizontal + page turn ===== */
-@media (min-width: 992px) {
-  .container-fluid.p-0 {
-    overflow-x: auto;
-    overflow-y: hidden;
-    display: flex;
-    flex-direction: row;
-    width: max-content;
-    max-width: 100%;
-    min-height: 100vh;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-  }
-
-  .container-fluid.p-0 > .resume-section {
-    min-width: calc(100vw - 17rem);
-    max-width: calc(100vw - 17rem);
-    min-height: 100vh;
-    scroll-snap-align: start;
-    transform-origin: left center;
-    transition: transform 0.65s ease, opacity 0.65s ease, box-shadow 0.65s ease;
-  }
-
-  .container-fluid.p-0 > .resume-section.is-turning {
-    transform: perspective(1200px) rotateY(-11deg) scale(0.98);
-    opacity: 0.82;
-    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.2);
-  }
-
-  .container-fluid.p-0 > hr {
-    display: none;
-  }
-
-  section.resume-section,
-  section.resume-section .resume-section-content {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .subheading,
-  .lead,
-  .interest-panel p {
-    text-align: center;
   }
 }
