@@ -27,34 +27,4 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const pageContainer = document.querySelector('.container-fluid.p-0');
-  const sections = document.querySelectorAll('.container-fluid.p-0 > .resume-section');
-
-  if (pageContainer && window.matchMedia('(min-width: 992px)').matches) {
-    pageContainer.addEventListener(
-      'wheel',
-      (event) => {
-        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-        event.preventDefault();
-        pageContainer.scrollBy({ left: event.deltaY, behavior: 'smooth' });
-      },
-      { passive: false }
-    );
-
-    let turnTimer;
-    pageContainer.addEventListener('scroll', () => {
-      sections.forEach((section) => section.classList.remove('is-turning'));
-
-      const activeSection = Array.from(sections).find((section) => {
-        const rect = section.getBoundingClientRect();
-        return rect.left >= 0 && rect.left < window.innerWidth * 0.45;
-      });
-
-      if (activeSection) {
-        activeSection.classList.add('is-turning');
-        clearTimeout(turnTimer);
-        turnTimer = setTimeout(() => activeSection.classList.remove('is-turning'), 420);
-      }
-    });
-  }
 });
