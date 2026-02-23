@@ -84,8 +84,6 @@
   --bs-highlight-bg: #fff3cd;
 }
 
-// ...existing code...
-
 *,
 *::before,
 *::after {
@@ -10994,6 +10992,7 @@ section.resume-section .resume-section-content {
 body {
   background: linear-gradient(145deg, #f8fafc 0%, #eef2ff 45%, #fdf2f8 100%);
   color: #4b5563;
+  overflow-x: hidden;
 }
 
 .text-primary {
@@ -11012,7 +11011,12 @@ body {
 #sideNav .navbar-nav .nav-item .nav-link:hover,
 #sideNav .navbar-nav .nav-item .nav-link.active {
   color: #ffffff;
-  transform: translateX(3px);
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-section {
@@ -11045,6 +11049,8 @@ body {
   text-transform: uppercase;
   color: #6d28d9;
   background: #ede9fe;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  animation: badgePulse 1.6s ease-in-out infinite;
 }
 
 .contact-grid {
@@ -11085,6 +11091,8 @@ body {
   border: none;
   background: linear-gradient(135deg, #f97316, #ec4899);
   box-shadow: 0 12px 20px rgba(236, 72, 153, 0.28);
+  position: relative;
+  overflow: hidden;
 }
 
 .support-btn:hover {
@@ -11162,11 +11170,6 @@ body {
 }
 
 /* Efeito de brilho no botão de apoio */
-.support-btn {
-  position: relative;
-  overflow: hidden;
-}
-
 .support-btn::after {
   content: "";
   position: absolute;
@@ -11225,13 +11228,67 @@ body {
   }
 }
 
+@keyframes badgePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.35);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 12px rgba(124, 58, 237, 0);
+  }
+}
+
+.site-footer {
+  padding: 2rem 1rem;
+  background: linear-gradient(180deg, #111827, #1f2937);
+}
+
+.footer-content {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-content h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.footer-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.footer-contact-grid a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #e5e7eb;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.footer-contact-grid a:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.16);
+}
+
 /* Respeita usuários com redução de movimento */
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in,
   .animate-fade-in-delayed,
   .animate-rise,
   .animate-pop,
-  .support-btn::after {
+  .support-btn::after,
+  .hero-badge {
     animation: none !important;
   }
 }
