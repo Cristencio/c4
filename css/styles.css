@@ -11047,52 +11047,6 @@ body {
   animation: badgePulse 1.6s ease-in-out infinite;
 }
 
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 0.75rem;
-}
-
-.contact-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: 700;
-  color: #4338ca;
-  background: #eef2ff;
-  border: 1px solid rgba(67, 56, 202, 0.12);
-}
-
-.contact-item:hover {
-  background: #e0e7ff;
-  color: #312e81;
-}
-
-.social-icons .social-icon {
-  background: linear-gradient(135deg, #4338ca, #7c3aed);
-  box-shadow: 0 10px 18px rgba(67, 56, 202, 0.28);
-}
-
-.social-icons .social-icon:hover {
-  background: linear-gradient(135deg, #312e81, #6d28d9);
-}
-
-.support-btn {
-  border: none;
-  background: linear-gradient(135deg, #f97316, #ec4899);
-  box-shadow: 0 12px 20px rgba(236, 72, 153, 0.28);
-  position: relative;
-  overflow: hidden;
-}
-
-.support-btn:hover {
-  background: linear-gradient(135deg, #ea580c, #db2777);
-}
-
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -11163,19 +11117,6 @@ body {
   box-shadow: 0 20px 40px rgba(76, 29, 149, 0.18);
 }
 
-/* Efeito de brilho no botão de apoio */
-.support-btn::after {
-  content: "";
-  position: absolute;
-  top: -120%;
-  left: -40%;
-  width: 36%;
-  height: 320%;
-  transform: rotate(24deg);
-  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
-  animation: shineSweep 3.2s ease-in-out infinite;
-}
-
 /* Keyframes principais */
 @keyframes fadeInUp {
   from {
@@ -11210,15 +11151,6 @@ body {
   }
   100% {
     transform: scale(1);
-  }
-}
-
-@keyframes shineSweep {
-  0%, 35% {
-    left: -45%;
-  }
-  55%, 100% {
-    left: 130%;
   }
 }
 
@@ -11346,7 +11278,6 @@ body {
   .animate-fade-in-delayed,
   .animate-rise,
   .animate-pop,
-  .support-btn::after,
   .hero-badge {
     animation: none !important;
   }
