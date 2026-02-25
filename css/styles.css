@@ -10879,6 +10879,10 @@ p.lead {
   font-size: 1.5rem;
 }
 
+.location-text {
+  text-transform: none;
+}
+
 #sideNav {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -11241,6 +11245,7 @@ body {
 }
 
 .site-footer {
+  margin-top: 2rem;
   padding: 2rem 1rem;
   background: linear-gradient(180deg, #111827, #1f2937);
 }
@@ -11248,37 +11253,84 @@ body {
 .footer-content {
   max-width: 980px;
   margin: 0 auto;
-  text-align: center;
 }
 
-.footer-content h3 {
+.footer-columns {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.footer-column h3 {
   color: #fff;
   margin-bottom: 1rem;
+  text-align: left;
 }
 
 .footer-contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(130px, 1fr));
+  gap: 0.65rem;
 }
 
 .footer-contact-grid a {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
   text-decoration: none;
   color: #e5e7eb;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 12px;
-  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
   transition: transform 0.25s ease, background 0.25s ease;
 }
 
 .footer-contact-grid a:hover {
   transform: translateY(-3px);
   background: rgba(255, 255, 255, 0.16);
+}
+
+.footer-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.footer-social-icons .social-icon {
+  margin-right: 0;
+  height: 2.4rem;
+  width: 2.4rem;
+  font-size: 1rem;
+}
+
+.footer-support-column {
+  text-align: right;
+}
+
+.footer-support-column .support-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 991.98px) {
+  .footer-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-column h3,
+  .footer-support-column {
+    text-align: center;
+  }
+
+  .footer-contact-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .footer-social-icons {
+    justify-content: center;
+  }
 }
 
 /* Respeita usuários com redução de movimento */
