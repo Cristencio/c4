@@ -10879,6 +10879,10 @@ p.lead {
   font-size: 1.5rem;
 }
 
+.location-text {
+  text-transform: none;
+}
+
 #sideNav {
   padding-left: 1rem;
   padding-right: 1rem;
