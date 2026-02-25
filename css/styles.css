@@ -11009,12 +11009,73 @@ body {
 
 #sideNav .navbar-nav .nav-item .nav-link {
   color: rgba(255, 255, 255, 0.8);
-  transition: all 0.25s ease;
+  position: relative;
+  transform: translateX(0);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+#sideNav .navbar-nav .nav-item .nav-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, #22d3ee, #a78bfa);
+  box-shadow: 0 0 14px rgba(167, 139, 250, 0.6);
+  transition: height 0.25s ease;
+}
+
+#sideNav .navbar-nav .nav-item .nav-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
 }
 
 #sideNav .navbar-nav .nav-item .nav-link:hover,
 #sideNav .navbar-nav .nav-item .nav-link.active {
   color: #ffffff;
+  transform: translateX(6px);
+}
+
+#sideNav .navbar-nav .nav-item .nav-link:hover::before,
+#sideNav .navbar-nav .nav-item .nav-link.active::before {
+  height: 70%;
+}
+
+#sideNav .navbar-nav .nav-item .nav-link:hover::after,
+#sideNav .navbar-nav .nav-item .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+#sideNav .navbar-nav .nav-item {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: navItemEnter 0.45s ease forwards;
+}
+
+#sideNav .navbar-nav .nav-item:nth-child(1) {
+  animation-delay: 0.06s;
+}
+
+#sideNav .navbar-nav .nav-item:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+#sideNav .navbar-nav .nav-item:nth-child(3) {
+  animation-delay: 0.18s;
+}
+
+#sideNav .navbar-nav .nav-item:nth-child(4) {
+  animation-delay: 0.24s;
 }
 
 .hero-section {
@@ -11244,6 +11305,13 @@ body {
   }
 }
 
+@keyframes navItemEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .site-footer {
   margin-top: 2rem;
   padding: 2rem 1rem;
@@ -11339,6 +11407,7 @@ body {
   .animate-fade-in-delayed,
   .animate-rise,
   .animate-pop,
+  #sideNav .navbar-nav .nav-item,
   .support-btn::after,
   .hero-badge {
     animation: none !important;
